@@ -134,6 +134,13 @@ io.on("connection", function(socket){
         }
         socket.broadcast.emit("ELEMENT_CHANGE", element);
     });
+    socket.on("DIE_DIE_DIE", function(data){
+        console.log("Element Changing " + data.element);
+        var element = {
+            tag: data.element
+        }
+        socket.broadcast.emit("HERO_NEVER_DIE", element);
+    });
 });
 
 server.listen(app.get('port'), function(){
