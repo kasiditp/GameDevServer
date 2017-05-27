@@ -142,6 +142,7 @@ io.on("connection", function(socket){
         socket.broadcast.emit("HERO_NEVER_DIE", element);
     });
     socket.on("STORE_SCORE", function(data){
+        console.log("STORE SCORE " + parseInt(data.playerno));
         payload[clients[parseInt(data.playerno) - 1]+"/score"] = 1;
         databaseRef.update(payload);
     });
