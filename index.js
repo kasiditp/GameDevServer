@@ -90,7 +90,11 @@ io.on("connection", function(socket){
         }
     });
     socket.on("ELEMENT_CHANGING", function(data){
-        socket.broadcast.emit("ELEMENT_CHANGE", data.element);
+        console.log("Element Changing " + data.element);
+        var element = {
+            element: data.element
+        }
+        socket.broadcast.emit("ELEMENT_CHANGE", element);
     });
 });
 
