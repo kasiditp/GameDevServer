@@ -89,6 +89,9 @@ io.on("connection", function(socket){
             }
         }
     });
+    socket.on("ELEMENT_CHANGING", function(data){
+        socket.broadcast.emit("ELEMENT_CHANGE", data.element);
+    });
 });
 
 server.listen(app.get('port'), function(){
