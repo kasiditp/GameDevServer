@@ -135,9 +135,9 @@ io.on("connection", function(socket){
         socket.broadcast.emit("ELEMENT_CHANGE", element);
     });
     socket.on("DIE_DIE_DIE", function(data){
-        console.log("Element Changing " + data.element);
+        console.log("DIE DIE DIE " + data.tag);
         var element = {
-            tag: data.element
+            tag: data.tag
         }
         socket.broadcast.emit("HERO_NEVER_DIE", element);
     });
