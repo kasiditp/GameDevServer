@@ -141,8 +141,8 @@ io.on("connection", function(socket){
         }
         socket.broadcast.emit("HERO_NEVER_DIE", element);
     });
-    socket.on("STORE_SCORE", function(){
-        payload[currentUser.name+"/score"] = 1;
+    socket.on("STORE_SCORE", function(data){
+        payload[clients[data.index - 1]+"/score"] = 1;
         databaseRef.update(payload);
     });
 });
