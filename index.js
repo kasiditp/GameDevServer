@@ -4,9 +4,35 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
+var firebase = require('firebase');
+
 app.set('port', process.env.PORT || 3000);
 
 var clients = [];
+
+firebase.initializeApp({
+    // serviceAccount: "./gamedev-service-account.json",
+    apiKey: "AIzaSyBOomMPoBi11mrpyDKnLtGqy2OsBUdFQGY",
+    databaseURL: "https://gamedev-50e4c.firebaseio.com",
+    projectId: "gamedev-50e4c",
+});
+
+var databaseRef = firebase.database().ref("account");
+var payload = {};
+
+// winning update score to firebase
+// payload['account/'+accountName+"/"+score] = message;
+// databaseRef.update(payload);
+// databaseRef.child('/Jub/score').on("value", function(snapshot) {
+//     console.log(snapshot.val());
+//     payload['/Jub/score'] = 2;
+//     databaseRef.update(payload);
+// }, function (errorObject) {
+//   console.log("The read failed: " + errorObject.code);
+// });
+// databaseRef.push({
+//     text:"ddd"
+// });
 
 io.on("connection", function(socket){
     var currentUser;
@@ -57,6 +83,18 @@ io.on("connection", function(socket){
         // var level = data.level;
         console.log("Wave Level UP");
         socket.broadcast.emit("UPGRADE_WAVE", {status:"true"});
+    });
+
+    socket.on("LOSE_LIFE", function(data){
+        // var level = data.level;
+        console.log("LOSE LIFE");
+        socket.broadcast.emit("UPGRADE_LIFES", {status:"true"});
+    });
+
+    socket.on("LOSE_GAME", function(data){
+        // var level = data.level;
+        console.log("LOSE GAME");
+        socket.broadcast.emit("WIN_GAME", {status:"true"});
     });
 
     socket.on("CREATE_TOWER", function(data){
