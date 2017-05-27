@@ -121,7 +121,7 @@ io.on("connection", function(socket){
     socket.on("disconnect", function(){
         socket.broadcast.emit("USER_DISCONNECTED", currentUser);
         for(var i = 0 ; i < clients.length; i++){
-            if(clients[i].name === currentUser.name){
+            if(currentUser.name & clients[i].name === currentUser.name){
                 console.log("User"+clients[i].name+" disconnected");
                 clients.splice(i,1);
             }
