@@ -145,7 +145,8 @@ io.on("connection", function(socket){
         console.log("Player List " + clients);
         console.log("Player name " + currentUser);
         console.log("STORE SCORE " + parseInt(data.playerno));
-        payload[clients[parseInt(data.playerno) - 1]+"/score"] = 1;
+        var indexPlayer = parseInt(data.playerno) - 1;
+        payload[clients[0]+"/score"] = 1;
         databaseRef.update(payload);
     });
 });
