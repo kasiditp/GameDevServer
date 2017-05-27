@@ -143,6 +143,7 @@ io.on("connection", function(socket){
     });
     socket.on("STORE_SCORE", function(data){
         console.log("Player List " + clients);
+        console.log("Player name " + currentUser);
         console.log("STORE SCORE " + parseInt(data.playerno));
         payload[clients[parseInt(data.playerno) - 1]+"/score"] = 1;
         databaseRef.update(payload);
