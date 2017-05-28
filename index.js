@@ -151,7 +151,7 @@ io.on("connection", function (socket) {
         if (clients[indexPlayer]) {
             databaseRef.child(clients[indexPlayer].name).child("score").on("value", function (snapshot) {
                 console.log(snapshot.val());
-                payload[clients[indexPlayer].name + "/score"] = 5;
+                payload[clients[indexPlayer].name + "/score"] = snapshot.val() + 1;
                 databaseRef.update(payload);
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);
