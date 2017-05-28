@@ -157,6 +157,14 @@ io.on("connection", function(socket){
         }
         socket.broadcast.emit("SOLD_TOWER", towers);
     });
+    socket.on("UPGRADE_TOWER_ELEMENT", function(data){
+        console.log("Upgrade tower "+ data.tag);
+        towers = {
+            tag:data.tag,
+            element:data.element
+        }
+        socket.broadcast.emit("UPGRADED_TOWER_ELEMENT", towers);
+    });
 });
 
 server.listen(app.get('port'), function(){
