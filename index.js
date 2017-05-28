@@ -150,6 +150,13 @@ io.on("connection", function(socket){
         payload[clients[indexPlayer].name+"/score"] = 1;
         databaseRef.update(payload);
     });
+    socket.on("SELL_TOWER", function(data){
+        console.log("SOLD tower "+ data.tag);
+        towers = {
+            tag:data.tag
+        }
+        socket.broadcast.emit("SOLD_TOWER", towers);
+    });
 });
 
 server.listen(app.get('port'), function(){
