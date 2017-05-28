@@ -102,7 +102,8 @@ io.on("connection", function(socket){
         
         towers = {
             type:data.type,
-            position:data.position
+            position:data.position,
+            tag:data.tag
         }
         console.log("DO FUNCTION CREATE TOWER" + towers.type + towers.position);
         socket.broadcast.emit("CREATE_TOWERS", towers);
