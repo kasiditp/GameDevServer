@@ -150,8 +150,8 @@ io.on("connection", function (socket) {
         var tempVal;
         if (clients[indexPlayer]) {
             databaseRef.child(clients[indexPlayer].name).child("score").on("value", function (snapshot) {
-                //  console.log(snapshot.val());
-                payload[clients[indexPlayer].name + "/score"] = parseInt(snapshot.val()) + 1;
+                console.log(snapshot.val());
+                payload[clients[indexPlayer].name + "/score"] = 5;
                 databaseRef.update(payload);
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);
