@@ -147,13 +147,15 @@ io.on("connection", function (socket) {
         console.log("Player name " + currentUser);
         console.log("STORE SCORE " + parseInt(data.playerno));
         var indexPlayer = parseInt(data.playerno) - 1;
+        var tempVal;
         if (clients[indexPlayer]) {
             databaseRef.child(clients[indexPlayer].name).child("score").on("value", function (snapshot) {
                 //  console.log(snapshot.val());
+                tempVal = snapshot;
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);
             });
-            payload[clients[indexPlayer].name + "/score"] = parseInt(snapshot.val()) + 1;
+            payload[clients[indexPlayer].name + "/score"] = parseInt(tempVal.val()) + 1;
             databaseRef.update(payload);
         }
     });
