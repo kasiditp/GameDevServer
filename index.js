@@ -147,7 +147,14 @@ io.on("connection", function(socket){
         console.log("Player name " + currentUser);
         console.log("STORE SCORE " + parseInt(data.playerno));
         var indexPlayer = parseInt(data.playerno) - 1;
-        payload[clients[indexPlayer].name+"/score"] = 1;
+        
+        databaseRef.child(clients[indexPlayer].name+"/score").on("value", function(snapshot) {
+        //  console.log(snapshot.val());
+            payload[clients[indexPlayer].name+"/score"] = parseInt(snapshot.val())++;
+            databaseRef.update(payload);
+        }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
         databaseRef.update(payload);
     });
     socket.on("SELL_TOWER", function(data){
